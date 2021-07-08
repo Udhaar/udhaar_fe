@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import { SignIn } from "./components/Signin";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
-  return (
-    <div className = "m-5 text-sm">hello</div>
-  )
+  return <SignIn />;
 }
 
-export default App
+export default App;
