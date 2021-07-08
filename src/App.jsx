@@ -1,12 +1,8 @@
 import React, { useState } from "react";
-import { SignIn } from "./components/Signin";
-import { SignUp } from "./components/SignUp";
+import { AppRouter } from "./components/AppRouter";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  // return <SignUp />;
-  return <SignIn />;
+  return <AppRouter />;
 }
 
 export default App;
