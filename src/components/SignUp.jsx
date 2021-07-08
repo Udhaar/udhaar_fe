@@ -1,6 +1,6 @@
 import React from "react";
 
-export const SignIn = () => {
+export const SignUp = () => {
   return (
     <div className="min-h-screen bg-[#14213D] text-white">
       {/* Udhaar logo and introduction */}
@@ -13,14 +13,26 @@ export const SignIn = () => {
       <div className="flex justify-center">
         <div className="bg-[#0164A2] flex flex-col px-8 pt-8 pb-3 rounded-lg">
           <form>
+            <div className="md:flex">
+              <input
+                type="text"
+                className="block bg-[#14213D] mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-[#FCA311] w-full md:w-56 mr-2 outline-none"
+                placeholder="First Name"
+              />
+              <input
+                type="text"
+                className="block bg-[#14213D] mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-[#FCA311] w-full md:w-56 outline-none"
+                placeholder="Last Name"
+              />
+            </div>
             <input
               type="email"
-              className="block bg-[#14213D] mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-[#FCA311] outline-none"
+              className="block bg-[#14213D] mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-[#FCA311] w-full outline-none"
               placeholder="Email Id"
             />
             <input
               type="password"
-              className="block bg-[#14213D] mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-[#FCA311] outline-none"
+              className="block bg-[#14213D] mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-[#FCA311] w-full outline-none"
               placeholder="Password"
             />
             <input
@@ -30,9 +42,9 @@ export const SignIn = () => {
             />
           </form>
           <p className="text-center text-sm mt-1">
-            Don't have an account?{" "}
+            Already an account?{" "}
             <a href="/" className="text-[#FCA311]">
-              Sign up
+              Login
             </a>
           </p>
         </div>
