@@ -8,7 +8,7 @@ export const AppRouter = () => {
     <Router>
       <Switch>
         <Route path="/" exact>
-          <div>Home</div>
+          <SignUp />
         </Route>
         <Route path="/signup">
           <SignUp />
