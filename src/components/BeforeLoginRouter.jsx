@@ -1,9 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { SignIn } from "./Signin";
 import { SignUp } from "./SignUp";
 
-export const AppRouter = () => {
+export const BeforeLoginRouter = () => {
   return (
     <Router>
       <Switch>

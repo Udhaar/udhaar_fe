@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const SignUp = () => {
@@ -36,7 +36,7 @@ export const SignUp = () => {
           }
         }
       })
-      .catch((error) => toast.error("Something went wrong"));
+      .catch(() => toast.error("Something went wrong"));
   }
 
   return (
@@ -96,7 +96,7 @@ export const SignUp = () => {
             />
           </form>
           <p className="text-center text-sm mt-1">
-            Already an account?{" "}
+            Already have an account?{" "}
             <Link to="/signin" className="text-[#FCA311]">
               Login
             </Link>
