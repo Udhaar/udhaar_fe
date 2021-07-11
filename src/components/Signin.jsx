@@ -17,7 +17,7 @@ export const SignIn = () => {
     const response = await signin(formData, []);
     if (response[0].status === 200) {
       localStorage.setItem("access_token", `Token ${response[1]["token"]}`);
-      history.push("/home");
+      history.push("/");
       window.location.reload();
     }
   };
