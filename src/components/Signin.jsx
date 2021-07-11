@@ -23,7 +23,7 @@ export const SignIn = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#14213D] text-white">
+    <div className="min-h-screen bg-darker text-white">
       {/* Udhaar logo and introduction */}
       <div className="flex items-center flex-col py-16">
         <img src="images/Logoo.svg" alt="" className="text-white w-52" />
@@ -32,11 +32,11 @@ export const SignIn = () => {
 
       {/* signin form */}
       <div className="flex justify-center">
-        <div className="bg-[#0164A2] flex flex-col px-8 pt-8 pb-3 rounded-lg">
+        <div className="bg-dark flex flex-col px-8 pt-8 pb-3 rounded-lg">
           <form onSubmit={handleSubmit}>
             <input
               type="email"
-              className="block bg-[#14213D] mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-[#FCA311] outline-none"
+              className="block bg-darker mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-primary outline-none"
               placeholder="Email Id"
               value={formData.email}
               onChange={(e) =>
@@ -45,7 +45,7 @@ export const SignIn = () => {
             />
             <input
               type="password"
-              className="block bg-[#14213D] mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-[#FCA311] outline-none"
+              className="block bg-darker mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-primary outline-none"
               placeholder="Password"
               value={formData.password}
               onChange={(e) =>
@@ -54,7 +54,7 @@ export const SignIn = () => {
             />
             <motion.input
               type="submit"
-              className="block bg-[#14213D] w-full bg-[#FCA311] py-1 text-lg rounded-lg cursor-pointer font-bold"
+              className="block bg-darker w-full bg-primary py-1 text-lg rounded-lg cursor-pointer font-bold"
               value="Login"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -62,7 +62,7 @@ export const SignIn = () => {
           </form>
           <p className="text-center text-sm mt-1">
             Don't have an account?{" "}
-            <Link to="/signup" className="text-[#FCA311]">
+            <Link to="/signup" className="text-primary">
               Sign up
             </Link>
           </p>

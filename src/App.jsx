@@ -6,7 +6,6 @@ import { AfterLoginRouter } from "./components/AfterLoginRouter";
 function App() {
   let router = <BeforeLoginRouter />;
   const access_token = localStorage.getItem("access_token");
-  console.log(access_token);
   if (access_token) router = <AfterLoginRouter />;
 
   return (

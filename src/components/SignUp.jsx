@@ -25,7 +25,7 @@ export const SignUp = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#14213D] text-white">
+    <div className="min-h-screen bg-darker text-white">
       {/* Udhaar logo and introduction */}
       <div className="flex items-center flex-col py-16">
         <img src="images/Logoo.svg" alt="" className="text-white w-52" />
@@ -33,13 +33,13 @@ export const SignUp = () => {
       </div>
 
       {/* signin form */}
-      <div className="flex justify-center">
-        <div className="bg-[#0164A2] flex flex-col px-8 pt-8 pb-3 rounded-lg">
+      <div className="flex justify-center max-w-screen">
+        <div className="bg-dark flex flex-col px-8 pt-8 pb-3 rounded-lg">
           <form onSubmit={handleSubmit}>
             <div className="md:flex">
               <input
                 type="text"
-                className="block bg-[#14213D] mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-[#FCA311] w-full md:w-56 mr-2 outline-none"
+                className="block bg-darker mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-primary w-full md:w-56 mr-2 outline-none"
                 placeholder="First Name"
                 value={formData.first_name}
                 onChange={(e) =>
@@ -48,7 +48,7 @@ export const SignUp = () => {
               />
               <input
                 type="text"
-                className="block bg-[#14213D] mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-[#FCA311] w-full md:w-56 outline-none"
+                className="block bg-darker mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-primary w-full md:w-56 outline-none"
                 placeholder="Last Name"
                 value={formData.last_name}
                 onChange={(e) =>
@@ -58,7 +58,7 @@ export const SignUp = () => {
             </div>
             <input
               type="email"
-              className="block bg-[#14213D] mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-[#FCA311] w-full outline-none"
+              className="block bg-darker mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-primary w-full outline-none"
               placeholder="Email Id"
               value={formData.email}
               onChange={(e) =>
@@ -67,7 +67,7 @@ export const SignUp = () => {
             />
             <input
               type="password"
-              className="block bg-[#14213D] mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-[#FCA311] w-full outline-none"
+              className="block bg-darker mb-3 text-lg px-4 py-3 rounded-lg border-[3px] border-primary w-full outline-none"
               placeholder="Password"
               value={formData.password}
               onChange={(e) =>
@@ -76,7 +76,7 @@ export const SignUp = () => {
             />
             <motion.input
               type="submit"
-              className="block bg-[#14213D] w-full bg-[#FCA311] py-1 text-lg rounded-lg cursor-pointer font-bold"
+              className="block bg-darker w-full bg-primary py-1 text-lg rounded-lg cursor-pointer font-bold"
               value="Sign up"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -84,7 +84,7 @@ export const SignUp = () => {
           </form>
           <p className="text-center text-sm mt-1">
             Already have an account?{" "}
-            <Link to="/signin" className="text-[#FCA311]">
+            <Link to="/signin" className="text-primary">
               Login
             </Link>
           </p>
