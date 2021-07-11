@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
+import { signup } from "./ApiRequests/api";
 
 export const SignUp = () => {
   const history = useHistory();
@@ -14,29 +16,12 @@ export const SignUp = () => {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    await fetch("http://localhost:8000/api/user/create/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        const statusCode = response.status;
-        const data = response.json();
-        return Promise.all([statusCode, data]);
-      })
-      .then((res) => {
-        if (res[0] === 201) {
-          toast.success("Registration successful!");
-          history.push("/signin");
-        } else {
-          for (var k in res[1]) {
-            toast.error(res[1][k][0]);
-          }
-        }
-      })
-      .catch(() => toast.error("Something went wrong"));
+
+    const response = await signup(formData, []);
+    if (response[0].status === 201) {
+      toast.success("Registration successful!");
+      history.push("/signin");
+    }
   }
 
   return (
@@ -89,10 +74,12 @@ export const SignUp = () => {
                 setFormData({ ...formData, password: e.target.value })
               }
             />
-            <input
+            <motion.input
               type="submit"
               className="block bg-[#14213D] w-full bg-[#FCA311] py-1 text-lg rounded-lg cursor-pointer font-bold"
               value="Sign up"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             />
           </form>
           <p className="text-center text-sm mt-1">

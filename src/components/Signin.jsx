@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
+import { signin } from "./ApiRequests/api";
 
 export const SignIn = () => {
   const history = useHistory();
@@ -12,33 +13,13 @@ export const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch("http://localhost:8000/api/user/token/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        console.log(response);
-        const statusCode = response.status;
-        const data = response.json();
-        return Promise.all([statusCode, data]);
-      })
-      .then((res) => {
-        if (res[0] === 200) {
-          localStorage.setItem("access_token", `Token ${res[1]["token"]}`);
-          history.push("/home");
-          window.location.reload();
-        } else {
-          for (var k in res[1]) {
-            toast.error(res[1][k][0]);
-          }
-        }
-      })
-      .catch((error) => {
-        toast.error("Something went wrong");
-      });
+
+    const response = await signin(formData, []);
+    if (response[0].status === 200) {
+      localStorage.setItem("access_token", `Token ${response[1]["token"]}`);
+      history.push("/home");
+      window.location.reload();
+    }
   };
 
   return (
@@ -71,10 +52,12 @@ export const SignIn = () => {
                 setFormData({ ...formData, password: e.target.value })
               }
             />
-            <input
+            <motion.input
               type="submit"
               className="block bg-[#14213D] w-full bg-[#FCA311] py-1 text-lg rounded-lg cursor-pointer font-bold"
               value="Login"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             />
           </form>
           <p className="text-center text-sm mt-1">
