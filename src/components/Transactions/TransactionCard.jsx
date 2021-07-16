@@ -4,7 +4,7 @@ export const TransactionCard = ({ description, amount, date, gave }) => {
   console.log(description, date, amount, gave);
   return (
     <div
-      className={`flex justify-between items-center px-3 py-1 ${
+      className={`flex justify-between items-center px-3 py-1 text-black ${
         gave ? "bg-[#10B981]" : "bg-[#F87171]"
       }`}
     >

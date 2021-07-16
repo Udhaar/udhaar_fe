@@ -6,7 +6,7 @@ import { TransactionCard } from "./TransactionCard";
 
 export const TransactionHistory = () => {
   return (
-    <div className="text-white bg-dark h-screen border-l-2 border-darker flex flex-col justify-between">
+    <div className="h-screen text-white bg-[#6A5F7A] border-l-2 border-white flex flex-col justify-between">
       <div className="bg-darker px-2 py-1">
         <PersonHeader
           name="Lorem ipsum"
@@ -47,7 +47,7 @@ export const TransactionHistory = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 bg-[#14213D] p-3">
+      <div className="grid grid-cols-3 bg-darker p-3">
         <div className="flex flex-col col-span-2 space-y-2 px-2">
           <div className="grid grid-cols-7 items-center text-center">
             <label htmlFor="amount" className="px-2 col-span-1 text-left">
@@ -87,7 +87,7 @@ export const TransactionHistory = () => {
           <input
             type="submit"
             value="Create transaction"
-            className="bg-[#FCA311] w-full px-1 text-2xl h-full whitespace-normal"
+            className="bg-primary w-full px-1 text-2xl h-full whitespace-normal"
           />
         </div>
       </div>

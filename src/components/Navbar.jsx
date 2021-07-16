@@ -11,7 +11,7 @@ export const Navbar = () => {
         <img
           src="/images/Logoo.svg"
           alt="Udhaar logo"
-          className="w-44 block m-auto"
+          className="w-44 block m-auto "
         />
       </div>
 
