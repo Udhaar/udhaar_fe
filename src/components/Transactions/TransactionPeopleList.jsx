@@ -3,12 +3,12 @@ import { PersonCard } from "./PersonCard";
 
 export const TransactionPeopleList = () => {
   return (
-    <div className="bg-white h-screen text-black">
+    <div className="bg-white flex flex-col h-screen text-black">
       <div className="py-3 px-6">
         <input
           type="text"
           placeholder="Find people"
-          className="w-full rounded-lg text-lg px-4 py-2 outline-none border-none bg-[#EAF1FF]"
+          className="w-full rounded-lg text-lg px-4 py-2 top-0 inline-block outline-none border-none bg-[#EAF1FF]"
         />
         <div className="flex text-sm justify-between my-2">
           <div className="bg-[#EAF1FF] rounded-md px-2 py-1">
@@ -36,7 +36,7 @@ export const TransactionPeopleList = () => {
         </div>
       </div>
 
-      <div className="h-full overflow-auto overflow-x-hidden">
+      <div className="h-full overflow-x-hidden">
         <PersonCard
           name="Marty Blanton"
           amount="100"
@@ -77,6 +77,36 @@ export const TransactionPeopleList = () => {
           name="Lori Langley"
           amount="500"
           email="Lori@Langley.com"
+          text="You will get"
+        />
+        <PersonCard
+          name="Godfrey Hawkins"
+          amount="100"
+          email="Godfrey@Hawkins.com"
+          text="You will get"
+        />
+        <PersonCard
+          name="Godfrey Hawkins"
+          amount="100"
+          email="Godfrey@Hawkins.com"
+          text="You will get"
+        />
+        <PersonCard
+          name="Godfrey Hawkins"
+          amount="100"
+          email="Godfrey@Hawkins.com"
+          text="You will get"
+        />
+        <PersonCard
+          name="Godfrey Hawkins"
+          amount="100"
+          email="Godfrey@Hawkins.com"
+          text="You will get"
+        />
+        <PersonCard
+          name="Godfrey Hawkins"
+          amount="100"
+          email="Godfrey@Hawkins.com"
           text="You will get"
         />
         <PersonCard
