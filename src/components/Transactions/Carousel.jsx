@@ -34,7 +34,7 @@ export const Carousel = () => {
   const slidePrev = () =>
     setActiveIndex(activeIndex === 0 ? 0 : activeIndex - 1);
   const slideNext = () =>
-    setActiveIndex(activeIndex === total ? total : activeIndex + 1);
+    setActiveIndex(activeIndex === total - 1 ? total - 1 : activeIndex + 1);
   const syncActiveIndex = ({ item }) => setActiveIndex(item);
   return (
     <div className="flex justify-between mx-5">

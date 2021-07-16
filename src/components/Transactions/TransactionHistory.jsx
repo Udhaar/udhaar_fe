@@ -6,14 +6,18 @@ import { TransactionCard } from "./TransactionCard";
 
 export const TransactionHistory = () => {
   return (
-    <div className="text-white bg-dark h-screen border-l-2 border-darker flex flex-col justify-between">
-      <div className="bg-darker px-2 py-1">
-        <PersonHeader
-          name="Lorem ipsum"
-          amount="100"
-          email="lorem@ipsum.com"
-          text="You will get"
-        />
+    <div className="text-black bg-white h-screen border-l-2 border-[#3C64B9] flex flex-col justify-between">
+      <div className="bg-[#3C64B9] px-2 py-1 text-white">
+        <div className="px-3 py-2 transition">
+          <div className="flex justify-between text-2xl">
+            <h3>Emerson Perry</h3>
+            <p> $200 </p>
+          </div>
+          <div className="flex justify-between text-sm">
+            <h3>emerson@perry.com</h3>
+            <p>You will get</p>
+          </div>
+        </div>
       </div>
 
       <div>
@@ -47,7 +51,7 @@ export const TransactionHistory = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 bg-[#14213D] p-3">
+      <div className="grid grid-cols-3 bg-[#EAF1FF] p-3">
         <div className="flex flex-col col-span-2 space-y-2 px-2">
           <div className="grid grid-cols-7 items-center text-center">
             <label htmlFor="amount" className="px-2 col-span-1 text-left">
@@ -87,7 +91,7 @@ export const TransactionHistory = () => {
           <input
             type="submit"
             value="Create transaction"
-            className="bg-[#FCA311] w-full px-1 text-2xl h-full whitespace-normal"
+            className="bg-[#3C64B9] text-white cursor-pointer w-full px-1 text-2xl h-full whitespace-normal"
           />
         </div>
       </div>
