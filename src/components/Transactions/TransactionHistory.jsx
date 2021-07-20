@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { Carousel } from "./Carousel";
 import { TransactionCard } from "./TransactionCard";
+import moment from "moment";
 
 export const TransactionHistory = ({ selectedPerson }) => {
   const [transactions, setTransactions] = useState([]);
@@ -46,13 +47,27 @@ export const TransactionHistory = ({ selectedPerson }) => {
         </div>
       </div>
 
-      <div>
+      <div className="overflow-auto">
         <Carousel
           transactions={transactions}
           external_id={selectedPerson.user.external_id}
         />
 
         <div className="flex flex-col space-y-1">
+          {transactions.map((transaction) => {
+            if (transaction.status > 1)
+              return (
+                <TransactionCard
+                  key={transaction.external_id}
+                  description={transaction.message}
+                  date={moment(transaction.created_date).format("LLL")}
+                  amount={transaction.amount}
+                  gave={
+                    transaction.receiver === selectedPerson.user.external_id
+                  }
+                />
+              );
+          })}
           <TransactionCard
             description="Samosa"
             date="29/12/2020 3:40 PM"
@@ -64,6 +79,18 @@ export const TransactionHistory = ({ selectedPerson }) => {
             date="29/12/2020 3:40 PM"
             amount="100"
             gave={false}
+          />
+          <TransactionCard
+            description="Samosa"
+            date="29/12/2020 3:40 PM"
+            amount="100"
+            gave={true}
+          />
+          <TransactionCard
+            description="Samosa"
+            date="29/12/2020 3:40 PM"
+            amount="100"
+            gave={true}
           />
           <TransactionCard
             description="Samosa"
