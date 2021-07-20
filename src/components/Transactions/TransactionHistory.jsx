@@ -1,27 +1,56 @@
-import React from "react";
-import { PersonHeader } from "./PersonHeader";
+import React, { useEffect, useState } from "react";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { Carousel } from "./Carousel";
 import { TransactionCard } from "./TransactionCard";
 
-export const TransactionHistory = () => {
-  return (
+export const TransactionHistory = ({ selectedPerson }) => {
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    if (selectedPerson) {
+      fetch(
+        `https://udhaar-staging.herokuapp.com/api/transaction/?user_external_id=${selectedPerson.user.external_id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("access_token"),
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((res) => setTransactions(res.results));
+    }
+  }, [selectedPerson]);
+
+  console.log(transactions);
+
+  return selectedPerson ? (
     <div className="text-black bg-white h-screen border-l-2 border-[#3C64B9] flex flex-col justify-between">
       <div className="bg-[#3C64B9] px-2 py-1 text-white">
         <div className="px-3 py-2 transition">
           <div className="flex justify-between text-2xl">
-            <h3>Emerson Perry</h3>
-            <p> $200 </p>
+            <h3>
+              {selectedPerson.user.first_name +
+                " " +
+                selectedPerson.user.last_name}
+            </h3>
+            <p> {selectedPerson.balance} </p>
           </div>
           <div className="flex justify-between text-sm">
-            <h3>emerson@perry.com</h3>
-            <p>You will get</p>
+            <h3>{selectedPerson.user.email}</h3>
+            <p>
+              {selectedPerson.balance >= 0 ? "You will get" : "You will pay"}
+            </p>
           </div>
         </div>
       </div>
 
       <div>
-        <Carousel />
+        <Carousel
+          transactions={transactions}
+          external_id={selectedPerson.user.external_id}
+        />
 
         <div className="flex flex-col space-y-1">
           <TransactionCard
@@ -96,5 +125,7 @@ export const TransactionHistory = () => {
         </div>
       </div>
     </div>
+  ) : (
+    "No transaction history"
   );
 };

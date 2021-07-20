@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PersonCard } from "./PersonCard";
+import { peopleList } from "../ApiRequests/api";
 
-export const TransactionPeopleList = () => {
+export const TransactionPeopleList = ({
+  people,
+  setSelectedUser,
+  setSelectedPerson,
+}) => {
   return (
     <div className="bg-white flex flex-col h-screen text-black">
       <div className="py-3 px-6">
@@ -37,6 +42,18 @@ export const TransactionPeopleList = () => {
       </div>
 
       <div className="h-full overflow-x-hidden">
+        {people.map((person) => (
+          <PersonCard
+            key={person.user.external_id}
+            name={person.user.first_name + " " + person.user.last_name}
+            amount={person.balance}
+            email={person.user.email}
+            text={person.balance >= 0 ? "You will get" : "You will pay"}
+            person={person}
+            setSelectedPerson={setSelectedPerson}
+          />
+        ))}
+
         <PersonCard
           name="Marty Blanton"
           amount="100"

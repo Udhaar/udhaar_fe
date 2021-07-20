@@ -1,16 +1,30 @@
 import { toast } from "react-toastify";
-const baseUrl = "http://localhost:8000/api";
+const baseUrl = "https://udhaar-staging.herokuapp.com/api";
 
-export const FireRequest = async (method, path, body, pathParam) => {
-  const response = fetch(baseUrl + path, {
+export const FireRequest = async (
+  method,
+  path,
+  body,
+  bodyRequired,
+  pathParam,
+  authenticationRequired
+) => {
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json");
+  if (authenticationRequired)
+    headers.append("Authorization", localStorage.getItem("access_token"));
+
+  const options = {
     method: method,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  })
+    headers: headers,
+  };
+
+  if (bodyRequired) options["body"] = JSON.stringify(body);
+
+  const response = fetch(baseUrl + path, options)
     .then((response) => {
       const data = response.json();
+      console.log(data);
       return Promise.all([response, data]);
     })
     .then((res) => {

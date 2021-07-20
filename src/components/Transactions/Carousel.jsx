@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { PendingTransactionCard } from "./PendingTransactionCard";
@@ -28,8 +28,25 @@ const items = [
 ];
 const total = items.length;
 
-export const Carousel = () => {
+export const Carousel = ({ transactions, external_id }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [pendingTransactions, setPendingTransactions] = useState([]);
+
+  useEffect(() => {
+    transactions.map((transaction) => {
+      console.log(transaction);
+      if (transaction.created_by === external_id && transaction.status === 1) {
+        const t = (
+          <PendingTransactionCard
+            amount={transaction.amount}
+            description={transaction.message}
+          />
+        );
+        console.log("transaction: ", t);
+        setPendingTransactions((trans) => [...trans, t]);
+      }
+    });
+  }, [transactions]);
 
   const slidePrev = () =>
     setActiveIndex(activeIndex === 0 ? 0 : activeIndex - 1);
@@ -58,7 +75,7 @@ export const Carousel = () => {
           mouseTracking
           disableDotsControls
           disableButtonsControls
-          items={items}
+          items={pendingTransactions}
           activeIndex={activeIndex}
           responsive={responsive}
           onSlideChanged={syncActiveIndex}

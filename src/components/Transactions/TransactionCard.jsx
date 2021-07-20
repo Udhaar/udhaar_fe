@@ -1,7 +1,6 @@
 import React from "react";
 
 export const TransactionCard = ({ description, amount, date, gave }) => {
-  console.log(description, date, amount, gave);
   return (
     <div
       className={`flex mx-2 bg-[#EAF1FF] justify-between items-center px-3 py-1 border-l-8 ${
