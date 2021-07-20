@@ -15,3 +15,7 @@ export const peopleList = () => {
 // export const transactionList = (pathParam) => {
 //   return FireRequest("GET", "/transaction/", {}, false, pathParam, true);
 // }
+
+export const createTransaction = (body, pathParam) => {
+  return FireRequest("POST", `/transaction/`, body, true, pathParam, true);
+};

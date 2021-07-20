@@ -3,9 +3,17 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import { Carousel } from "./Carousel";
 import { TransactionCard } from "./TransactionCard";
 import moment from "moment";
+import { createTransaction } from "../ApiRequests/api";
+import { toast } from "react-toastify";
 
 export const TransactionHistory = ({ selectedPerson }) => {
   const [transactions, setTransactions] = useState([]);
+  const [formData, setFormData] = useState({
+    amount: null,
+    gaveOrTook: "gave",
+  });
+
+  console.log(formData);
 
   useEffect(() => {
     if (selectedPerson) {
@@ -24,7 +32,20 @@ export const TransactionHistory = ({ selectedPerson }) => {
     }
   }, [selectedPerson]);
 
-  console.log(transactions);
+  const handleSubmit = async () => {
+    const data = {
+      amount: formData.amount,
+      message: formData.description,
+    };
+    if (formData.gaveOrTook === "gave")
+      data["receiver"] = selectedPerson.user.external_id;
+    else data["payer"] = selectedPerson.user.external_id;
+
+    const response = await createTransaction(data, []);
+    if (response[0].status === 201) {
+      toast.success("Transaction successfully created");
+    }
+  };
 
   return selectedPerson ? (
     <div className="text-black bg-white h-screen border-l-2 border-[#3C64B9] flex flex-col justify-between">
@@ -36,7 +57,7 @@ export const TransactionHistory = ({ selectedPerson }) => {
                 " " +
                 selectedPerson.user.last_name}
             </h3>
-            <p> {selectedPerson.balance} </p>
+            <p> {Math.abs(selectedPerson.balance)} </p>
           </div>
           <div className="flex justify-between text-sm">
             <h3>{selectedPerson.user.email}</h3>
@@ -47,7 +68,7 @@ export const TransactionHistory = ({ selectedPerson }) => {
         </div>
       </div>
 
-      <div className="overflow-auto">
+      <div className="overflow-auto flex flex-col flex-grow justify-between py-2">
         <Carousel
           transactions={transactions}
           external_id={selectedPerson.user.external_id}
@@ -68,7 +89,7 @@ export const TransactionHistory = ({ selectedPerson }) => {
                 />
               );
           })}
-          <TransactionCard
+          {/* <TransactionCard
             description="Samosa"
             date="29/12/2020 3:40 PM"
             amount="100"
@@ -103,21 +124,34 @@ export const TransactionHistory = ({ selectedPerson }) => {
             date="29/12/2020 3:40 PM"
             amount="100"
             gave={true}
-          />
+          /> */}
         </div>
       </div>
 
-      <div className="grid grid-cols-3 bg-[#EAF1FF] p-3">
+      <div className="grid grid-cols-3 bg-[#EAF1FF] py-3">
         <div className="flex flex-col col-span-2 space-y-2 px-2">
-          <div className="grid grid-cols-7 items-center text-center">
-            <label htmlFor="amount" className="px-2 col-span-1 text-left">
-              Gave
-            </label>
+          <div className="grid grid-cols-12 items-center text-center">
+            <div htmlFor="amount" className="px-2 col-span-3 text-left">
+              <select
+                value={formData.gaveOrTook}
+                onChange={(e) =>
+                  setFormData({ ...formData, gaveOrTook: e.target.value })
+                }
+              >
+                <option value="gave">Gave</option>
+                <option value="took">Took</option>
+              </select>
+            </div>
+
             <input
               type="number"
               placeholder="amount"
               id="amount"
-              className="text-black col-span-2 rounded-md"
+              className="text-black col-span-3 rounded-md"
+              value={formData.amount}
+              onChange={(e) =>
+                setFormData({ ...formData, amount: e.target.value })
+              }
             />
             <label htmlFor="date" className="px-2 col-span-1">
               on
@@ -126,7 +160,7 @@ export const TransactionHistory = ({ selectedPerson }) => {
               type="date"
               placeholder="date"
               id="date"
-              className="text-black rounded-md col-span-3"
+              className="text-black rounded-md col-span-5"
             />
           </div>
 
@@ -139,6 +173,10 @@ export const TransactionHistory = ({ selectedPerson }) => {
               placeholder="description"
               id="description"
               className="text-black rounded-md flex-grow"
+              value={formData.description}
+              onChange={(e) =>
+                setFormData({ ...formData, description: e.target.value })
+              }
             />
           </div>
         </div>
@@ -147,6 +185,7 @@ export const TransactionHistory = ({ selectedPerson }) => {
           <input
             type="submit"
             value="Create transaction"
+            onClick={handleSubmit}
             className="bg-[#3C64B9] text-white cursor-pointer w-full px-1 text-2xl h-full whitespace-normal"
           />
         </div>

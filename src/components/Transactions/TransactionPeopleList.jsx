@@ -1,12 +1,7 @@
 import React, { useEffect } from "react";
 import { PersonCard } from "./PersonCard";
-import { peopleList } from "../ApiRequests/api";
 
-export const TransactionPeopleList = ({
-  people,
-  setSelectedUser,
-  setSelectedPerson,
-}) => {
+export const TransactionPeopleList = ({ people, setSelectedPerson }) => {
   return (
     <div className="bg-white flex flex-col h-screen text-black">
       <div className="py-3 px-6">
