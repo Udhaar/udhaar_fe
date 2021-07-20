@@ -26,23 +26,22 @@ const items = [
     description="lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum"
   />,
 ];
-const total = items.length;
 
-export const Carousel = ({ transactions, external_id }) => {
+export const Carousel = ({ transactions, external_id, setReRender }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [pendingTransactions, setPendingTransactions] = useState([]);
 
   useEffect(() => {
     transactions.map((transaction) => {
-      console.log(transaction);
       if (transaction.created_by === external_id && transaction.status === 1) {
         const t = (
           <PendingTransactionCard
             amount={transaction.amount}
             description={transaction.message}
+            external_id={transaction.external_id}
+            setReRender={setReRender}
           />
         );
-        console.log("transaction: ", t);
         setPendingTransactions((trans) => [...trans, t]);
       }
     });
@@ -51,9 +50,13 @@ export const Carousel = ({ transactions, external_id }) => {
   const slidePrev = () =>
     setActiveIndex(activeIndex === 0 ? 0 : activeIndex - 1);
   const slideNext = () =>
-    setActiveIndex(activeIndex === total - 1 ? total - 1 : activeIndex + 1);
+    setActiveIndex(
+      activeIndex === pendingTransactions.length - 1
+        ? pendingTransactions.length - 1
+        : activeIndex + 1
+    );
   const syncActiveIndex = ({ item }) => setActiveIndex(item);
-  return (
+  return pendingTransactions.length > 0 ? (
     <div className="flex justify-between mx-5">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -97,5 +100,7 @@ export const Carousel = ({ transactions, external_id }) => {
         />
       </svg>
     </div>
+  ) : (
+    <div className="text-center my-auto text-xl">No pending transactions</div>
   );
 };

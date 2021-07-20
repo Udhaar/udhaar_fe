@@ -16,8 +16,6 @@ export const Transactions = () => {
     }
   }, []);
 
-  console.log("selectedPerson : ", selectedPerson);
-
   return (
     <div>
       <SmallNavbar />

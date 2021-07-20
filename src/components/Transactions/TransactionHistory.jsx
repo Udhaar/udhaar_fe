@@ -12,8 +12,7 @@ export const TransactionHistory = ({ selectedPerson }) => {
     amount: null,
     gaveOrTook: "gave",
   });
-
-  console.log(formData);
+  const [reRender, setReRender] = useState(false);
 
   useEffect(() => {
     if (selectedPerson) {
@@ -72,6 +71,7 @@ export const TransactionHistory = ({ selectedPerson }) => {
         <Carousel
           transactions={transactions}
           external_id={selectedPerson.user.external_id}
+          setReRender={setReRender}
         />
 
         <div className="flex flex-col space-y-1">

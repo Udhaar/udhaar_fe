@@ -24,7 +24,6 @@ export const FireRequest = async (
   const response = fetch(baseUrl + path, options)
     .then((response) => {
       const data = response.json();
-      console.log(data);
       return Promise.all([response, data]);
     })
     .then((res) => {
