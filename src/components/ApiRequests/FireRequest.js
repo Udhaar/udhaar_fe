@@ -7,13 +7,16 @@ export const FireRequest = async (
   body,
   bodyRequired,
   pathParam,
+  params,
   authenticationRequired
 ) => {
+  //headers
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
   if (authenticationRequired)
     headers.append("Authorization", localStorage.getItem("access_token"));
 
+  // fetch api options
   const options = {
     method: method,
     headers: headers,
@@ -21,6 +24,22 @@ export const FireRequest = async (
 
   if (bodyRequired) options["body"] = JSON.stringify(body);
 
+  // modifying path according to params
+  if (params) {
+    Object.entries(params).map((obj) => {
+      path = path.replace(`:${obj[0]}`, obj[1]);
+    });
+  }
+
+  // modifying path according to pathParam
+  if (pathParam) {
+    path = path + "?";
+    Object.entries(pathParam).map((obj) => {
+      path += `${obj[0]}=${obj[1]}`;
+    });
+  }
+
+  // calling fetch api
   const response = fetch(baseUrl + path, options)
     .then((response) => {
       const data = response.json();

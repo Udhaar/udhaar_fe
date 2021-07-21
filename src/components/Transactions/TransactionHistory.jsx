@@ -5,6 +5,7 @@ import { TransactionCard } from "./TransactionCard";
 import moment from "moment";
 import { createTransaction } from "../ApiRequests/api";
 import { toast } from "react-toastify";
+import { transactionList } from "../ApiRequests/api";
 
 export const TransactionHistory = ({ selectedPerson }) => {
   const [transactions, setTransactions] = useState([]);
@@ -12,22 +13,15 @@ export const TransactionHistory = ({ selectedPerson }) => {
     amount: null,
     gaveOrTook: "gave",
   });
-  const [reRender, setReRender] = useState(false);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (selectedPerson) {
-      fetch(
-        `https://udhaar-staging.herokuapp.com/api/transaction/?user_external_id=${selectedPerson.user.external_id}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: localStorage.getItem("access_token"),
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((res) => setTransactions(res.results));
+      const response = await transactionList({
+        user_external_id: selectedPerson.user.external_id,
+      });
+      if (response[0].status === 200) {
+        setTransactions(response[1].results);
+      }
     }
   }, [selectedPerson]);
 
@@ -40,7 +34,7 @@ export const TransactionHistory = ({ selectedPerson }) => {
       data["receiver"] = selectedPerson.user.external_id;
     else data["payer"] = selectedPerson.user.external_id;
 
-    const response = await createTransaction(data, []);
+    const response = await createTransaction(data, {});
     if (response[0].status === 201) {
       toast.success("Transaction successfully created");
     }
@@ -71,7 +65,6 @@ export const TransactionHistory = ({ selectedPerson }) => {
         <Carousel
           transactions={transactions}
           external_id={selectedPerson.user.external_id}
-          setReRender={setReRender}
         />
 
         <div className="flex flex-col space-y-1">
@@ -89,42 +82,6 @@ export const TransactionHistory = ({ selectedPerson }) => {
                 />
               );
           })}
-          {/* <TransactionCard
-            description="Samosa"
-            date="29/12/2020 3:40 PM"
-            amount="100"
-            gave={true}
-          />
-          <TransactionCard
-            description="Samosa"
-            date="29/12/2020 3:40 PM"
-            amount="100"
-            gave={false}
-          />
-          <TransactionCard
-            description="Samosa"
-            date="29/12/2020 3:40 PM"
-            amount="100"
-            gave={true}
-          />
-          <TransactionCard
-            description="Samosa"
-            date="29/12/2020 3:40 PM"
-            amount="100"
-            gave={true}
-          />
-          <TransactionCard
-            description="Samosa"
-            date="29/12/2020 3:40 PM"
-            amount="100"
-            gave={true}
-          />
-          <TransactionCard
-            description="Samosa"
-            date="29/12/2020 3:40 PM"
-            amount="100"
-            gave={true}
-          /> */}
         </div>
       </div>
 

@@ -1,21 +1,49 @@
 import { FireRequest } from "./FireRequest";
 
 export const signin = (body, pathParam) => {
-  return FireRequest("POST", `/user/token/`, body, true, pathParam, false);
+  return FireRequest(
+    "POST",
+    `/user/token/`,
+    body,
+    true,
+    pathParam,
+    null,
+    false
+  );
 };
 
 export const signup = (body, pathParam) => {
-  return FireRequest("POST", `/user/create/`, body, true, pathParam, false);
+  return FireRequest(
+    "POST",
+    `/user/create/`,
+    body,
+    true,
+    pathParam,
+    null,
+    false
+  );
 };
 
 export const peopleList = () => {
-  return FireRequest("GET", `/balance/`, {}, false, {}, true);
+  return FireRequest("GET", `/balance/`, {}, false, {}, null, true);
 };
 
-// export const transactionList = (pathParam) => {
-//   return FireRequest("GET", "/transaction/", {}, false, pathParam, true);
-// }
+export const transactionList = (pathParam) => {
+  return FireRequest("GET", "/transaction/", {}, false, pathParam, {}, true);
+};
 
 export const createTransaction = (body, pathParam) => {
-  return FireRequest("POST", `/transaction/`, body, true, pathParam, true);
+  return FireRequest("POST", `/transaction/`, body, true, pathParam, {}, true);
+};
+
+export const declineOrAcceptTransaction = (body, params) => {
+  return FireRequest(
+    "PATCH",
+    "/transaction/:external_id/",
+    body,
+    true,
+    {},
+    params,
+    true
+  );
 };

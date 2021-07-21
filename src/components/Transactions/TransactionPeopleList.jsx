@@ -3,7 +3,7 @@ import { PersonCard } from "./PersonCard";
 
 export const TransactionPeopleList = ({ people, setSelectedPerson }) => {
   return (
-    <div className="bg-white flex flex-col h-screen text-black">
+    <div className="bg-white flex flex-col h-screen text-black border-r-2 border-[#3C64B9]">
       <div className="py-3 px-6">
         <input
           type="text"
@@ -48,85 +48,6 @@ export const TransactionPeopleList = ({ people, setSelectedPerson }) => {
             setSelectedPerson={setSelectedPerson}
           />
         ))}
-
-        <PersonCard
-          name="Marty Blanton"
-          amount="100"
-          email="Marty@Blanton.com"
-          text="You will get"
-        />
-        <PersonCard
-          name="Danielle Wright"
-          amount="156"
-          email="Danielle@Wright.com"
-          text="You will pay"
-        />
-        <PersonCard
-          name="Shirley Gordon"
-          amount="130"
-          email="Shirley@Gordon.com"
-          text="You will get"
-        />
-        <PersonCard
-          name="Harriet Patton"
-          amount="70"
-          email="Harriet@Patton.com"
-          text="You will get"
-        />
-        <PersonCard
-          name="Kit Greer"
-          amount="3"
-          email="Kit@Greer.com"
-          text="You will pay"
-        />
-        <PersonCard
-          name="Basil Abbott"
-          amount="110"
-          email="Basil@Abbott.com"
-          text="You will pay"
-        />
-        <PersonCard
-          name="Lori Langley"
-          amount="500"
-          email="Lori@Langley.com"
-          text="You will get"
-        />
-        <PersonCard
-          name="Godfrey Hawkins"
-          amount="100"
-          email="Godfrey@Hawkins.com"
-          text="You will get"
-        />
-        <PersonCard
-          name="Godfrey Hawkins"
-          amount="100"
-          email="Godfrey@Hawkins.com"
-          text="You will get"
-        />
-        <PersonCard
-          name="Godfrey Hawkins"
-          amount="100"
-          email="Godfrey@Hawkins.com"
-          text="You will get"
-        />
-        <PersonCard
-          name="Godfrey Hawkins"
-          amount="100"
-          email="Godfrey@Hawkins.com"
-          text="You will get"
-        />
-        <PersonCard
-          name="Godfrey Hawkins"
-          amount="100"
-          email="Godfrey@Hawkins.com"
-          text="You will get"
-        />
-        <PersonCard
-          name="Godfrey Hawkins"
-          amount="100"
-          email="Godfrey@Hawkins.com"
-          text="You will get"
-        />
       </div>
     </div>
   );

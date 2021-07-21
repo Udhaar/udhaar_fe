@@ -8,26 +8,7 @@ const responsive = {
   1024: { items: 1 },
 };
 
-const items = [
-  <PendingTransactionCard
-    amount="100"
-    description="lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum"
-  />,
-  <PendingTransactionCard
-    amount="150"
-    description="lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum"
-  />,
-  <PendingTransactionCard
-    amount="200"
-    description="lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum"
-  />,
-  <PendingTransactionCard
-    amount="160"
-    description="lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum"
-  />,
-];
-
-export const Carousel = ({ transactions, external_id, setReRender }) => {
+export const Carousel = ({ transactions, external_id }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [pendingTransactions, setPendingTransactions] = useState([]);
 
@@ -39,7 +20,6 @@ export const Carousel = ({ transactions, external_id, setReRender }) => {
             amount={transaction.amount}
             description={transaction.message}
             external_id={transaction.external_id}
-            setReRender={setReRender}
           />
         );
         setPendingTransactions((trans) => [...trans, t]);
