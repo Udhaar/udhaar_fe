@@ -6,7 +6,7 @@ export const Navbar = () => {
   const [selectedTab, setSelectedTab] = useState("transactions");
 
   return (
-    <div className="bg-[#EAF1FF] border-r-2 border-[#3C64B9] h-full align-baseline max-h-screen text-center text-[#262020] flex flex-col justify-between">
+    <div className="bg-primary border-r-2 border-secondary h-full align-baseline max-h-screen text-center text-[#262020] flex flex-col justify-between">
       <div className="pt-3">
         <svg
           viewBox="0 0 1007 422"
@@ -44,7 +44,7 @@ export const Navbar = () => {
       <div className="flex flex-col">
         <button
           className={`text-2xl py-2 ${
-            selectedTab === "transactions" ? "bg-[#3C64B9] text-white" : ""
+            selectedTab === "transactions" ? "bg-secondary text-white" : ""
           }`}
           onClick={() => setSelectedTab("transactions")}
         >
@@ -52,7 +52,7 @@ export const Navbar = () => {
         </button>
         <button
           className={`text-2xl py-2 ${
-            selectedTab === "personal" ? "bg-[#3C64B9] text-white" : ""
+            selectedTab === "personal" ? "bg-secondary text-white" : ""
           }`}
           onClick={() => setSelectedTab("personal")}
         >
@@ -60,7 +60,7 @@ export const Navbar = () => {
         </button>
         <button
           className={`text-2xl py-2 ${
-            selectedTab === "preferences" ? "bg-[#3C64B9] text-white" : ""
+            selectedTab === "preferences" ? "bg-secondary text-white" : ""
           }`}
           onClick={() => setSelectedTab("preferences")}
         >
@@ -68,7 +68,7 @@ export const Navbar = () => {
         </button>
         <button
           className={`text-2xl py-2 ${
-            selectedTab === "profile" ? "bg-[#3C64B9] text-white" : ""
+            selectedTab === "profile" ? "bg-secondary text-white" : ""
           }`}
           onClick={() => setSelectedTab("profile")}
         >
@@ -76,7 +76,7 @@ export const Navbar = () => {
         </button>
         <button
           className={`text-2xl py-2 ${
-            selectedTab === "notifications" ? "bg-[#3C64B9] text-white" : ""
+            selectedTab === "notifications" ? "bg-secondary text-white" : ""
           }`}
           onClick={() => setSelectedTab("notifications")}
         >
@@ -85,7 +85,7 @@ export const Navbar = () => {
       </div>
       <div className="">
         <button
-          className="bg-[#3C64B9] text-white rounded-lg text-2xl mb-5 w-5/6 py-2"
+          className="bg-secondary text-white rounded-lg text-2xl mb-5 w-5/6 py-2"
           onClick={() => {
             localStorage.removeItem("access_token");
             history.push("/");

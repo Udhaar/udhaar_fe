@@ -13,6 +13,10 @@ export const Transactions = () => {
     const response = await peopleList();
     if (response[0].status === 200) {
       setPeople(response[1].results);
+      console.log(response[1].results, response[1].results[0]);
+      if (response[1].results.length > 0) {
+        setSelectedPerson(response[1].results[0]);
+      }
     }
   }, []);
 

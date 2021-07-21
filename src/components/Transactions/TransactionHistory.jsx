@@ -41,8 +41,8 @@ export const TransactionHistory = ({ selectedPerson }) => {
   };
 
   return selectedPerson ? (
-    <div className="text-black bg-white h-screen border-l-2 border-[#3C64B9] flex flex-col justify-between">
-      <div className="bg-[#3C64B9] px-2 py-1 text-white">
+    <div className="text-black bg-white h-screen border-l-2 border-secondary flex flex-col justify-between">
+      <div className="bg-secondary px-2 py-1 text-white">
         <div className="px-3 py-2 transition">
           <div className="flex justify-between text-2xl">
             <h3>
@@ -85,7 +85,7 @@ export const TransactionHistory = ({ selectedPerson }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 bg-[#EAF1FF] py-3">
+      <div className="grid grid-cols-3 bg-primary py-3">
         <div className="flex flex-col col-span-2 space-y-2 px-2">
           <div className="grid grid-cols-12 items-center text-center">
             <div htmlFor="amount" className="px-2 col-span-3 text-left">
@@ -143,12 +143,14 @@ export const TransactionHistory = ({ selectedPerson }) => {
             type="submit"
             value="Create transaction"
             onClick={handleSubmit}
-            className="bg-[#3C64B9] text-white cursor-pointer w-full px-1 text-2xl h-full whitespace-normal"
+            className="bg-secondary text-white cursor-pointer w-full px-1 text-2xl h-full whitespace-normal"
           />
         </div>
       </div>
     </div>
   ) : (
-    "No transaction history"
+    <div className="h-screen flex items-center justify-center text-2xl">
+      No transaction history
+    </div>
   );
 };
