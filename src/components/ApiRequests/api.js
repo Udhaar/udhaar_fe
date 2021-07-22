@@ -47,3 +47,19 @@ export const declineOrAcceptTransaction = (body, params) => {
     true
   );
 };
+
+export const searchUser = (pathParam) => {
+  return FireRequest("GET", "/user/search/", {}, false, pathParam, {}, true);
+};
+
+export const getBalance = (params) => {
+  return FireRequest(
+    "GET",
+    "/balance/:external_id",
+    {},
+    false,
+    {},
+    params,
+    true
+  );
+};

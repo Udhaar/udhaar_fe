@@ -10,7 +10,7 @@ export const PersonCard = ({
 }) => {
   return (
     <div
-      className="px-3 py-2 hover:bg-primary cursor-pointer transition"
+      className="px-3 pt-1 hover:bg-primary cursor-pointer transition"
       onClick={() => setSelectedPerson(person)}
     >
       <div className="flex justify-between text-2xl">
@@ -21,7 +21,7 @@ export const PersonCard = ({
         <h3>{email}</h3>
         <p>{text}</p>
       </div>
-      <div className="border-2 border-[#f0f5ff] mx-4 mt-4"></div>
+      <div className="border-2 border-[#f0f5ff] mx-4 mt-2"></div>
     </div>
   );
 };
