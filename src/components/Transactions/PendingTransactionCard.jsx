@@ -3,6 +3,7 @@ import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { toast } from "react-toastify";
 import { declineOrAcceptTransaction } from "../ApiRequests/api";
+import { AppContext } from "../AppContext";
 
 export const PendingTransactionCard = ({
   amount,
@@ -11,17 +12,18 @@ export const PendingTransactionCard = ({
 }) => {
   const [openDeclineForm, setOpenDeclineForm] = React.useState(false);
   const [declineMessage, setDeclineMessage] = React.useState("");
+  const { fetchPeopleList } = React.useContext(AppContext);
 
   const handleSubmit = async (accept) => {
     let data = {};
     if (accept) {
       data = {
-        status: 3,
-        decline_comment: declineMessage,
+        status: 2,
       };
     } else {
       data = {
-        status: 2,
+        status: 3,
+        decline_comment: declineMessage,
       };
     }
 
@@ -30,8 +32,10 @@ export const PendingTransactionCard = ({
     });
     if (response[0].status === 200) {
       setOpenDeclineForm(false);
-      if (accept) toast.success(`Transaction accepted successfully`);
-      else toast.success(`Transaction declined successfully`);
+      if (accept) {
+        toast.success(`Transaction accepted successfully`);
+      } else toast.success(`Transaction declined successfully`);
+      fetchPeopleList();
     }
   };
 

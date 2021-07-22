@@ -41,7 +41,7 @@ export const TransactionHistory = ({ selectedPerson }) => {
   };
 
   return selectedPerson ? (
-    <div className="text-black bg-white h-screen border-l-2 border-secondary flex flex-col justify-between">
+    <div className="text-black bg-white h-screen flex flex-col justify-between">
       <div className="bg-secondary px-2 py-1 text-white">
         <div className="px-3 py-2 transition">
           <div className="flex justify-between text-2xl">

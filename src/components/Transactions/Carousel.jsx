@@ -13,6 +13,7 @@ export const Carousel = ({ transactions, external_id }) => {
   const [pendingTransactions, setPendingTransactions] = useState([]);
 
   useEffect(() => {
+    setPendingTransactions([]);
     transactions.map((transaction) => {
       if (transaction.created_by === external_id && transaction.status === 1) {
         const t = (
