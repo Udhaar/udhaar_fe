@@ -35,15 +35,26 @@ export const Transactions = () => {
         <div className="hidden md2:block col-span-2">
           <Navbar />
         </div>
-        <div className="col-span-10 md:col-span-4 md2:col-span-3">
+        <div
+          className={`md:block md:col-span-4 md2:col-span-3 ${
+            selectedPerson ? "hidden" : "col-span-10"
+          } `}
+        >
           <TransactionPeopleList
             people={people}
             setSelectedPerson={setSelectedPerson}
           />
         </div>
-        <div className="hidden md:block col-span-6 md2:col-span-5">
+        <div
+          className={`md:block md:col-span-6 md2:col-span-5 ${
+            selectedPerson ? "col-span-10" : "hidden"
+          }`}
+        >
           <AppContext.Provider value={globalState}>
-            <TransactionHistory selectedPerson={selectedPerson} />
+            <TransactionHistory
+              selectedPerson={selectedPerson}
+              setSelectedPerson={setSelectedPerson}
+            />
           </AppContext.Provider>
         </div>
       </div>

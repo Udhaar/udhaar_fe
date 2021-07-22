@@ -90,21 +90,21 @@ export const TransactionPeopleList = ({ people, setSelectedPerson }) => {
       </div>
 
       <div
-        className="bg-white inline-block absolute rounded-full bottom-20 right-16 cursor-pointer"
+        className="bg-white inline-block absolute rounded-full bottom-12 right-12 cursor-pointer"
         onClick={() => setOpenSearchForm(true)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="#3C64B9"
           viewBox="0 0 20 20"
-          className="w-12"
+          className="w-14"
         >
           <path d="M0 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2zm4 7h5V4h2v5h5v2h-5v5H9v-5H4z" />
         </svg>
       </div>
       {openSearchForm && (
         <Modal open={openSearchForm} onClose={() => setOpenSearchForm(false)}>
-          <div className="">
+          <div>
             <form className="flex flex-col gap-2">
               <label for="decline_message">Search User</label>
               <input
