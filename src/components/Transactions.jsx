@@ -1,8 +1,6 @@
 import React, { useEffect, useState, createContext } from "react";
-import { Navbar } from "./Navbar";
 import { TransactionPeopleList } from "./Transactions/TransactionPeopleList";
 import { TransactionHistory } from "./Transactions/TransactionHistory";
-import { SmallNavbar } from "./SmallNavbar";
 import { peopleList } from "./ApiRequests/api";
 import { AppContext } from "./AppContext";
 
@@ -29,35 +27,29 @@ export const Transactions = () => {
   };
 
   return (
-    <div>
-      <SmallNavbar />
-      <div className="grid grid-cols-10 h-screen overflow-hidden">
-        <div className="hidden md2:block col-span-2">
-          <Navbar />
-        </div>
-        <div
-          className={`md:block md:col-span-4 md2:col-span-3 ${
-            selectedPerson ? "hidden" : "col-span-10"
-          } `}
-        >
-          <TransactionPeopleList
-            people={people}
+    <>
+      <div
+        className={` md:flex flex-col md:col-span-4 md2:col-span-3 row-span-1 ${
+          selectedPerson ? "hidden" : "col-span-10 flex flex-col"
+        } `}
+      >
+        <TransactionPeopleList
+          people={people}
+          setSelectedPerson={setSelectedPerson}
+        />
+      </div>
+      <div
+        className={`md:flex flex-col md:col-span-6 md2:col-span-5 row-span-1 ${
+          selectedPerson ? "col-span-10 flex flex-col" : "hidden"
+        }`}
+      >
+        <AppContext.Provider value={globalState}>
+          <TransactionHistory
+            selectedPerson={selectedPerson}
             setSelectedPerson={setSelectedPerson}
           />
-        </div>
-        <div
-          className={`md:block md:col-span-6 md2:col-span-5 ${
-            selectedPerson ? "col-span-10" : "hidden"
-          }`}
-        >
-          <AppContext.Provider value={globalState}>
-            <TransactionHistory
-              selectedPerson={selectedPerson}
-              setSelectedPerson={setSelectedPerson}
-            />
-          </AppContext.Provider>
-        </div>
+        </AppContext.Provider>
       </div>
-    </div>
+    </>
   );
 };
