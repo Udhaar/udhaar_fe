@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from "react";
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
+import React from "react";
 import { PendingTransactionCard } from "./PendingTransactionCard";
 
-const responsive = {
-  568: { items: 1 },
-  1024: { items: 1 },
-};
+export const CarouselComp = ({ transactions, external_id }) => {
+  const [index, setIndex] = React.useState(0);
+  const [totalTrans, setTotalTrans] = React.useState(0);
+  const [pendingTransactions, setPendingTransactions] = React.useState([]);
 
-export const Carousel = ({ transactions, external_id }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [pendingTransactions, setPendingTransactions] = useState([]);
-
-  useEffect(() => {
+  React.useEffect(() => {
     setPendingTransactions([]);
+    let trans = [];
     transactions.map((transaction) => {
       if (transaction.created_by === external_id && transaction.status === 1) {
         const t = (
@@ -23,28 +18,31 @@ export const Carousel = ({ transactions, external_id }) => {
             external_id={transaction.external_id}
           />
         );
-        setPendingTransactions((trans) => [...trans, t]);
+        trans = [...trans, t];
+        setTotalTrans(trans.length);
       }
     });
+    setPendingTransactions(trans);
   }, [transactions]);
 
-  const slidePrev = () =>
-    setActiveIndex(activeIndex === 0 ? 0 : activeIndex - 1);
-  const slideNext = () =>
-    setActiveIndex(
-      activeIndex === pendingTransactions.length - 1
-        ? pendingTransactions.length - 1
-        : activeIndex + 1
+  const prev = () => {
+    setIndex((index) => (index === 0 ? 0 : index - 1));
+  };
+
+  const next = () => {
+    setIndex((index) =>
+      index === totalTrans - 1 ? totalTrans - 1 : index + 1
     );
-  const syncActiveIndex = ({ item }) => setActiveIndex(item);
+  };
+
   return pendingTransactions.length > 0 ? (
     <div className="flex justify-between mx-5">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-5 w-5"
         viewBox="0 0 20 20"
-        fill="currentColor"
-        onClick={slidePrev}
+        fill={index === 0 ? "gray" : "black"}
+        onClick={() => prev()}
         className="cursor-pointer w-16 block"
       >
         <path
@@ -53,25 +51,13 @@ export const Carousel = ({ transactions, external_id }) => {
           clipRule="evenodd"
         />
       </svg>
-
-      <div className="w-5/6 text-center">
-        <AliceCarousel
-          mouseTracking
-          disableDotsControls
-          disableButtonsControls
-          items={pendingTransactions}
-          activeIndex={activeIndex}
-          responsive={responsive}
-          onSlideChanged={syncActiveIndex}
-        />
-      </div>
-
+      <div>{pendingTransactions[index] && pendingTransactions[index]}</div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="h-5 w-5"
         viewBox="0 0 20 20"
-        fill="currentColor"
-        onClick={slideNext}
+        fill={index === totalTrans - 1 ? "gray" : "black"}
+        onClick={() => next()}
         className="cursor-pointer w-16"
       >
         <path

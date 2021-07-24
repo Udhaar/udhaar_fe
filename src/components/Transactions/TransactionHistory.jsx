@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "react-alice-carousel/lib/alice-carousel.css";
-import { Carousel } from "./Carousel";
 import { TransactionCard } from "./TransactionCard";
 import moment from "moment";
-import { createTransaction } from "../ApiRequests/api";
-import { toast } from "react-toastify";
 import { transactionList } from "../ApiRequests/api";
 import { CreateTransactionComponent } from "./CreateTransactionComponent";
+import { CarouselComp } from "./CarouselComp";
 
 export const TransactionHistory = ({ selectedPerson, setSelectedPerson }) => {
   const [transactions, setTransactions] = useState([]);
-  const [formData, setFormData] = useState({
-    amount: null,
-    gaveOrTook: "gave",
-  });
 
   useEffect(async () => {
     if (selectedPerson) {
@@ -61,7 +55,7 @@ export const TransactionHistory = ({ selectedPerson, setSelectedPerson }) => {
       </div>
 
       <div className="overflow-auto flex flex-col flex-grow justify-between py-2">
-        <Carousel
+        <CarouselComp
           transactions={transactions}
           external_id={selectedPerson.user.external_id}
         />
