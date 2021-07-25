@@ -4,10 +4,12 @@ import { TransactionCard } from "./TransactionCard";
 import moment from "moment";
 import { transactionList } from "../ApiRequests/api";
 import { CreateTransactionComponent } from "./CreateTransactionComponent";
-import { CarouselComp } from "./CarouselComp";
+import { Carousel } from "./Carousel";
+import { PendingTransactionCard } from "./PendingTransactionCard";
 
 export const TransactionHistory = ({ selectedPerson, setSelectedPerson }) => {
   const [transactions, setTransactions] = useState([]);
+  const [pendingTransactions, setPendingTransactions] = React.useState([]);
 
   useEffect(async () => {
     if (selectedPerson) {
@@ -19,6 +21,29 @@ export const TransactionHistory = ({ selectedPerson, setSelectedPerson }) => {
       }
     }
   }, [selectedPerson]);
+
+  React.useEffect(() => {
+    if (selectedPerson && transactions.length > 0) {
+      setPendingTransactions([]);
+      let trans = [];
+      transactions.map((transaction) => {
+        if (
+          transaction.created_by === selectedPerson.user.external_id &&
+          transaction.status === 1
+        ) {
+          const t = (
+            <PendingTransactionCard
+              amount={transaction.amount}
+              description={transaction.message}
+              external_id={transaction.external_id}
+            />
+          );
+          trans = [...trans, t];
+        }
+      });
+      setPendingTransactions(trans);
+    }
+  }, [transactions]);
 
   return selectedPerson ? (
     <div className="text-black bg-white h-screen flex flex-col justify-between">
@@ -55,10 +80,7 @@ export const TransactionHistory = ({ selectedPerson, setSelectedPerson }) => {
       </div>
 
       <div className="overflow-auto flex flex-col flex-grow justify-between py-2">
-        <CarouselComp
-          transactions={transactions}
-          external_id={selectedPerson.user.external_id}
-        />
+        <Carousel items={pendingTransactions} />
 
         <div className="flex flex-col space-y-1">
           {transactions.map((transaction) => {

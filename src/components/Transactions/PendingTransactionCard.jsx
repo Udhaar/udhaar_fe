@@ -4,23 +4,6 @@ import { Modal } from "react-responsive-modal";
 import { toast } from "react-toastify";
 import { declineOrAcceptTransaction } from "../ApiRequests/api";
 import { AppContext } from "../AppContext";
-import { motion } from "framer-motion";
-const containerVariants = {
-  hidden: {
-    opacity: 0,
-    x: "100vw",
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { type: "spring", delay: 0.5 },
-  },
-  exit: {
-    x: "-100vh",
-    transition: { ease: "easeInOut" },
-  },
-};
-
 export const PendingTransactionCard = ({
   amount,
   description,
@@ -56,13 +39,7 @@ export const PendingTransactionCard = ({
   };
 
   return (
-    <motion.div
-      className="bg-primary w-[17rem] h-[9.91rem] flex flex-col justify-between px-5 py-2 my-2 mx-auto rounded-2xl"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-    >
+    <div className="bg-primary w-[13rem] md:w-[17rem] h-[9.91rem] flex flex-col justify-between px-5 py-2 my-2 mx-auto rounded-2xl flex-grow-0 flex-shrink-0">
       <h3 className="text-center text-4xl font-bold">${amount}</h3>
       <p className="text-center text-xs">{description}</p>
       <div className="my-2 flex justify-between">
@@ -104,6 +81,6 @@ export const PendingTransactionCard = ({
           </Modal>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
