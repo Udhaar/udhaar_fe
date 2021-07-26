@@ -16,7 +16,11 @@ export const TransactionHistory = ({ selectedPerson, setSelectedPerson }) => {
         user_external_id: selectedPerson.user.external_id,
       });
       if (response[0].status === 200) {
-        setTransactions(response[1].results);
+        setTransactions(
+          response[1].results.sort((t1, t2) => {
+            return t1.created_date - t2.created_date || t1.status - t2.status;
+          })
+        );
       }
     }
   }, [selectedPerson]);

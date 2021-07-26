@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { createTransaction } from "../ApiRequests/api";
 import { toast } from "react-toastify";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
+import { AppContext } from "../AppContext";
 
 export const CreateTransactionComponent = ({ external_id }) => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export const CreateTransactionComponent = ({ external_id }) => {
   });
   const [showCreateTransactionModal, setShowCreateTransactionModal] =
     React.useState(false);
+  const { fetchPeopleList } = useContext(AppContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +27,7 @@ export const CreateTransactionComponent = ({ external_id }) => {
     if (response[0].status === 201) {
       toast.success("Transaction successfully created");
     }
+    fetchPeopleList();
   };
 
   return (
