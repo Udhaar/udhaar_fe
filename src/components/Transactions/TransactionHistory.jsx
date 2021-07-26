@@ -84,18 +84,16 @@ export const TransactionHistory = ({ selectedPerson, setSelectedPerson }) => {
 
         <div className="flex flex-col space-y-1">
           {transactions.map((transaction) => {
-            if (transaction.status > 1)
-              return (
-                <TransactionCard
-                  key={transaction.external_id}
-                  description={transaction.message}
-                  date={moment(transaction.created_date).format("LLL")}
-                  amount={transaction.amount}
-                  gave={
-                    transaction.receiver === selectedPerson.user.external_id
-                  }
-                />
-              );
+            return (
+              <TransactionCard
+                key={transaction.external_id}
+                description={transaction.message}
+                date={moment(transaction.created_date).format("LLL")}
+                amount={transaction.amount}
+                gave={transaction.receiver === selectedPerson.user.external_id}
+                status={transaction.status}
+              />
+            );
           })}
         </div>
       </div>

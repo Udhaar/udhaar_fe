@@ -1,11 +1,18 @@
 import React from "react";
 
-export const TransactionCard = ({ description, amount, date, gave }) => {
+export const TransactionCard = ({
+  description,
+  amount,
+  date,
+  gave,
+  status,
+}) => {
+  const color =
+    status === 1 ? "border-primary" : gave ? "border-safe" : "border-danger";
+
   return (
     <div
-      className={`flex flex-col md:flex-row mx-2 bg-primary justify-between items-center px-3 py-1 border-l-8 md:gap-3 ${
-        gave ? "border-safe" : "border-danger"
-      }`}
+      className={`flex flex-col md:flex-row mx-2 justify-between items-center px-3 py-1 border-l-8 md:gap-3 ${color}`}
     >
       <div className="flex flex-col w-full md:w-auto">
         <div className="leading-tight">{description}</div>
