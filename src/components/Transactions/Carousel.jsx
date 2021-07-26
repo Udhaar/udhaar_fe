@@ -40,8 +40,6 @@ export const Carousel = ({ items }) => {
       </svg>
     </div>
   ) : (
-    <div className="text-center my-auto text-xl py-3">
-      No pending transactions
-    </div>
+    <div className="text-center my-auto text-xl py-3">No pending approvals</div>
   );
 };
