@@ -3,46 +3,24 @@ import { PersonCard } from "./PersonCard";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { searchUser, getBalance } from "../ApiRequests/api";
+import { useHistory } from "react-router";
 
 export const TransactionPeopleList = ({ people, setSelectedPerson }) => {
   const [openSearchForm, setOpenSearchForm] = React.useState(false);
-  const [searchedUser, setSearchedUser] = React.useState({
-    balance: 0.0,
-    user: null,
-  });
+  const history = useHistory();
   const [searchEmail, setSearchEmail] = React.useState("");
 
   const handleSearchUser = async (e) => {
     e.preventDefault();
     const response = await searchUser({ email: searchEmail });
     if (response[0].status === 200) {
-      setSearchedUser({ ...searchedUser, user: response[1] });
+      setOpenSearchForm(false);
+      history.push(`/transactions/${response[1].external_id}`);
     }
-  };
-
-  React.useEffect(() => {
-    if (searchedUser.user) {
-      fetchSearchedUserBalance(searchedUser.user.external_id);
-    }
-  }, [searchedUser.user]);
-
-  const fetchSearchedUserBalance = async (external_id) => {
-    const res = await getBalance({ external_id: external_id });
-    if (res[0].status === 200) {
-      setSearchedUser({ ...searchedUser, balance: res[1]["balance"] });
-    } else {
-      setSearchedUser({ ...searchedUser, balance: "0.00" });
-    }
-  };
-
-  const handleNewSelectedUser = (e) => {
-    e.preventDefault();
-    setSelectedPerson(searchedUser);
-    setOpenSearchForm(false);
   };
 
   return (
-    <div className="bg-white flex flex-col h-screen text-black border-r-2 border-secondary relative">
+    <div className="bg-white flex flex-col h-screen text-'black border-r-2 border-secondary relative">
       <div className="py-2 px-3">
         <input
           type="text"
@@ -84,7 +62,6 @@ export const TransactionPeopleList = ({ people, setSelectedPerson }) => {
             email={person.user.email}
             text={person.balance >= 0 ? "You will get" : "You will pay"}
             person={person}
-            setSelectedPerson={setSelectedPerson}
           />
         ))}
       </div>
@@ -106,11 +83,12 @@ export const TransactionPeopleList = ({ people, setSelectedPerson }) => {
         <Modal open={openSearchForm} onClose={() => setOpenSearchForm(false)}>
           <div>
             <form className="flex flex-col gap-2">
-              <label for="decline_message">Search User</label>
+              <label for="decline_message">Create transaction with</label>
               <input
                 type="email"
                 value={searchEmail}
                 id="decline_message"
+                placeholder="email"
                 onChange={(e) => setSearchEmail(e.target.value)}
                 className="rounded-lg"
               />
@@ -121,21 +99,6 @@ export const TransactionPeopleList = ({ people, setSelectedPerson }) => {
                 value="Search person"
               />
             </form>
-
-            {searchedUser.user && (
-              <div className="mt-5">
-                <h4>Results: </h4>
-                <div
-                  className="bg-primary py-1 px-2 rounded-lg mt-2 cursor-pointer"
-                  onClick={(e) => handleNewSelectedUser(e)}
-                >
-                  <h5 className="text-lg">
-                    {searchedUser.user.first_name} {searchedUser.user.last_name}
-                  </h5>
-                  <span className="text-sm">{searchedUser.user.email}</span>
-                </div>
-              </div>
-            )}
           </div>
         </Modal>
       )}

@@ -1,17 +1,15 @@
 import React from "react";
+import { useHistory } from "react-router";
 
-export const PersonCard = ({
-  name,
-  email,
-  amount,
-  text,
-  person,
-  setSelectedPerson,
-}) => {
+export const PersonCard = ({ name, email, amount, text, person }) => {
+  const history = useHistory();
+  const handleClick = (external_id) => {
+    history.push(`/transactions/${external_id}`);
+  };
   return (
     <div
       className="px-3 pt-1 hover:bg-primary cursor-pointer transition"
-      onClick={() => setSelectedPerson(person)}
+      onClick={() => handleClick(person.user.external_id)}
     >
       <div className="flex justify-between text-2xl">
         <h3>{name}</h3>

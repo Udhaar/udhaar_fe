@@ -23,7 +23,7 @@ export const TransactionHistory = ({ selectedPerson, setSelectedPerson }) => {
   }, [selectedPerson]);
 
   React.useEffect(() => {
-    if (selectedPerson && transactions.length > 0) {
+    if (selectedPerson) {
       setPendingTransactions([]);
       let trans = [];
       transactions.map((transaction) => {

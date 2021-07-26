@@ -1,10 +1,12 @@
-import React, { useEffect, useState, createContext } from "react";
+import React, { useEffect, useState } from "react";
 import { TransactionPeopleList } from "./Transactions/TransactionPeopleList";
 import { TransactionHistory } from "./Transactions/TransactionHistory";
-import { peopleList } from "./ApiRequests/api";
+import { peopleList, getBalance } from "./ApiRequests/api";
 import { AppContext } from "./AppContext";
+import { useParams } from "react-router-dom";
 
 export const Transactions = () => {
+  const external_id = useParams().external_id;
   const [people, setPeople] = useState([]);
   const [selectedPerson, setSelectedPerson] = useState(null);
 
@@ -18,6 +20,13 @@ export const Transactions = () => {
   useEffect(() => {
     fetchPeopleList();
   }, []);
+
+  useEffect(async () => {
+    if (external_id) {
+      const response = await getBalance({ external_id: external_id });
+      if (response[0].status === 200) setSelectedPerson(response[1]);
+    }
+  }, [external_id, people]);
 
   const globalState = {
     fetchPeopleList: fetchPeopleList,

@@ -21,6 +21,9 @@ export const AfterLoginRouter = () => {
             <Route path="/transactions" exact>
               <Transactions />
             </Route>
+            <Route path="/transactions/:external_id" exact>
+              <Transactions />
+            </Route>
           </Switch>
         </Router>
       </div>
