@@ -1,19 +1,22 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import "react-responsive-modal/styles.css";
 import { toast } from "react-toastify";
 import { declineOrAcceptTransaction } from "../ApiRequests/api";
 import { AppContext } from "../AppContext";
 import { Dialog, Transition } from "@headlessui/react";
+import { GlobalContext } from "../GlobalContext";
 
 export const PendingTransactionCard = ({
   amount,
   description,
   external_id,
+  payer_external_id,
 }) => {
   const [openDeclineForm, setOpenDeclineForm] = useState(false);
   const [openAcceptDialog, setOpenAcceptDialog] = useState(false);
   const [declineMessage, setDeclineMessage] = useState("");
-  const { fetchPeopleList } = React.useContext(AppContext);
+  const { fetchPeopleList } = useContext(AppContext);
+  const { currentUser } = useContext(GlobalContext);
 
   const handleSubmit = async (accept) => {
     let data = {};
@@ -46,6 +49,12 @@ export const PendingTransactionCard = ({
 
   return (
     <div className="bg-primary w-[13rem] md:w-[17rem] h-[9.91rem] flex flex-col justify-between px-5 py-2 my-2 mx-auto rounded-2xl flex-grow-0 flex-shrink-0">
+      <h6 className="text-xs text-center">
+        {" "}
+        {payer_external_id === currentUser.external_id
+          ? "You gave"
+          : "You took"}
+      </h6>
       <h3 className="text-center text-4xl font-bold">${amount}</h3>
       <p className="text-center text-xs">{description}</p>
       <div className="my-2 flex justify-between">
@@ -98,6 +107,13 @@ export const PendingTransactionCard = ({
                     >
                       Are you sure you want to accept this transaction?
                     </Dialog.Title>
+                    <div>
+                      You are{" "}
+                      {payer_external_id === currentUser.external_id
+                        ? "giving"
+                        : "taking"}{" "}
+                      ${amount} for {description}
+                    </div>
                     <div className="flex flex-col md:flex-row gap-3 w-full justify-between">
                       <button
                         className="bg-danger text-white px-3 py-2 rounded-md flex-1"
@@ -106,7 +122,7 @@ export const PendingTransactionCard = ({
                         Close
                       </button>
                       <button
-                        className="bg-danger text-white px-3 py-2 rounded-md flex-1 bg-safe"
+                        className="text-white px-3 py-2 rounded-md flex-1 bg-safe"
                         onClick={() => handleSubmit(true)}
                       >
                         Accept Transaction

@@ -35,6 +35,7 @@ export const TransactionHistory = ({ selectedPerson, setSelectedPerson }) => {
               amount={transaction.amount}
               description={transaction.message}
               external_id={transaction.external_id}
+              payer_external_id={transaction.payer}
             />
           );
           trans = [...trans, t];

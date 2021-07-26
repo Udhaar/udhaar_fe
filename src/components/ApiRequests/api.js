@@ -24,6 +24,10 @@ export const signup = (body, pathParam) => {
   );
 };
 
+export const getCurrentUser = () => {
+  return FireRequest("GET", `/user/me/`, {}, false, {}, null, true);
+};
+
 export const peopleList = () => {
   return FireRequest("GET", `/balance/`, {}, false, {}, null, true);
 };

@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { PersonCard } from "./PersonCard";
 import "react-responsive-modal/styles.css";
-import { Modal } from "react-responsive-modal";
 import { searchUser, getBalance } from "../ApiRequests/api";
 import { useHistory } from "react-router";
 import { Dialog, Transition } from "@headlessui/react";
