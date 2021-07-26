@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import { PersonCard } from "./PersonCard";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 import { searchUser, getBalance } from "../ApiRequests/api";
 import { useHistory } from "react-router";
+import { Dialog, Transition } from "@headlessui/react";
 
 export const TransactionPeopleList = ({ people, setSelectedPerson }) => {
   const [openSearchForm, setOpenSearchForm] = React.useState(false);
@@ -79,29 +80,70 @@ export const TransactionPeopleList = ({ people, setSelectedPerson }) => {
           <path d="M0 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2zm4 7h5V4h2v5h5v2h-5v5H9v-5H4z" />
         </svg>
       </div>
-      {openSearchForm && (
-        <Modal open={openSearchForm} onClose={() => setOpenSearchForm(false)}>
-          <div>
-            <form className="flex flex-col gap-2">
-              <label for="decline_message">Create transaction with</label>
-              <input
-                type="email"
-                value={searchEmail}
-                id="decline_message"
-                placeholder="email"
-                onChange={(e) => setSearchEmail(e.target.value)}
-                className="rounded-lg"
-              />
-              <input
-                type="submit"
-                className="bg-danger text-white px-3 py-2 rounded-md cursor-pointer"
-                onClick={(e) => handleSearchUser(e)}
-                value="Search person"
-              />
-            </form>
+
+      <Transition appear show={openSearchForm} as={Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-10 overflow-y-auto"
+          onClose={() => setOpenSearchForm(false)}
+        >
+          <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
+          <div className="min-h-screen px-4 text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <Dialog.Overlay className="fixed inset-0" />
+            </Transition.Child>
+
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <div className="inline-block w-full max-w-xs p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-xl">
+                <Dialog.Title
+                  as="h3"
+                  className="text-lg font-medium leading-6 text-gray-900 text-center mb-4"
+                >
+                  Create transaction with
+                </Dialog.Title>
+                <form className="flex flex-col gap-3">
+                  <input
+                    type="email"
+                    value={searchEmail}
+                    id="decline_message"
+                    placeholder="Email"
+                    onChange={(e) => setSearchEmail(e.target.value)}
+                    className="rounded-lg"
+                  />
+                  <input
+                    type="submit"
+                    className="bg-danger text-white px-3 py-2 rounded-md cursor-pointer"
+                    onClick={(e) => handleSearchUser(e)}
+                    value="Search person"
+                  />
+                </form>
+              </div>
+            </Transition.Child>
           </div>
-        </Modal>
-      )}
+        </Dialog>
+      </Transition>
     </div>
   );
 };
