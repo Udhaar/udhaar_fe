@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "react-alice-carousel/lib/alice-carousel.css";
 import { TransactionCard } from "./TransactionCard";
 import moment from "moment";
 import { transactionList } from "../ApiRequests/api";
