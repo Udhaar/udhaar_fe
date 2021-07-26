@@ -9,6 +9,8 @@ module.exports = {
       colors: {
         primary: "#EAF1FF",
         secondary: "#3C64B9",
+        danger: "#F87171",
+        safe: "#10B981",
       },
       screens: {
         md2: "970px",

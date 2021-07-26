@@ -94,7 +94,7 @@ export const TransactionPeopleList = ({ people, setSelectedPerson }) => {
               />
               <input
                 type="submit"
-                className="bg-[#F87171] text-white px-3 py-2 rounded-md cursor-pointer"
+                className="bg-danger text-white px-3 py-2 rounded-md cursor-pointer"
                 onClick={(e) => handleSearchUser(e)}
                 value="Search person"
               />
