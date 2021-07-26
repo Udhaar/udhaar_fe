@@ -55,7 +55,7 @@ export const PendingTransactionCard = ({
           ? "You gave"
           : "You took"}
       </h6>
-      <h3 className="text-center text-4xl font-bold">${amount}</h3>
+      <h3 className="text-center text-4xl font-bold">₹{amount}</h3>
       <p className="text-center text-xs">{description}</p>
       <div className="my-2 flex justify-between">
         <button
@@ -112,7 +112,7 @@ export const PendingTransactionCard = ({
                       {payer_external_id === currentUser.external_id
                         ? "giving"
                         : "taking"}{" "}
-                      ${amount} for {description}
+                      ₹{amount} for {description}
                     </div>
                     <div className="flex flex-col md:flex-row gap-3 w-full justify-between">
                       <button

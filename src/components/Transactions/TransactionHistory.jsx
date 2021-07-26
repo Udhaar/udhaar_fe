@@ -68,7 +68,7 @@ export const TransactionHistory = ({ selectedPerson, setSelectedPerson }) => {
                 " " +
                 selectedPerson.user.last_name}
             </h3>
-            <p> {Math.abs(selectedPerson.balance)} </p>
+            <p> ₹ {Math.abs(selectedPerson.balance)} </p>
           </div>
           <div className="flex justify-between text-sm">
             <h3>{selectedPerson.user.email}</h3>

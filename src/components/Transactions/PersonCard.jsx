@@ -13,7 +13,7 @@ export const PersonCard = ({ name, email, amount, text, person }) => {
     >
       <div className="flex justify-between text-2xl">
         <h3>{name}</h3>
-        <p>${Math.abs(amount)}</p>
+        <p>₹{Math.abs(amount)}</p>
       </div>
       <div className="flex justify-between text-sm">
         <h3>{email}</h3>

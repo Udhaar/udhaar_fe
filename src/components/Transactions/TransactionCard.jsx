@@ -12,7 +12,7 @@ export const TransactionCard = ({ description, amount, date, gave }) => {
         <div className="text-xs">{date}</div>
       </div>
       <div className="w-full md:w-auto text-left md:text-right">
-        {gave ? "You gave " : "You took "} ${amount}
+        {gave ? "You gave " : "You took "} ₹{amount}
       </div>
     </div>
   );
