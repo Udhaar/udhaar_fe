@@ -1,5 +1,7 @@
 ![Logo](https://udhaar.me/Logoo.svg)
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/aac75334-d9f0-4a0a-a75e-6324d463695a/deploy-status)](https://app.netlify.com/sites/modest-shirley-c4be02/deploys)
+
 # Project Title
 
 Udhaar is a personal finance and debt management app that helps you track your debts and loans with friends.
@@ -31,7 +33,7 @@ This repo contains the frontend for Udhaar.
 
 ## Demo
 
-[staging.udhaar.me](staging.udhaar.me)
+[staging.udhaar.me](https://staging.udhaar.me)
 
 ## Feedback
 
